@@ -1,3 +1,13 @@
+
+const Router = require('express').Router
+const {ensureLoggedIn} = require("../middleware/auth");
+const router = new Router();
+const Message = require("../models/message")
+
+const ExpressError = require("../expressError");
+
+
+
 /** GET /:id - get detail of message.
  *
  * => {message: {id,
@@ -11,6 +21,18 @@
  *
  **/
 
+router.get("/:id/", ensureLoggedIn, async function(req, res, next) {
+    try {
+      let message = await Message.get(req.params.id);
+      if (messsage.to_user.username !== username && message.from_user.username !== username) {
+        throw new ExpressError("Cannot read this message", 401);
+      }
+      return res.json({ message });
+    } catch (err) {
+      return next(err);
+    }
+  });
+
 
 /** POST / - post message.
  *
@@ -18,6 +40,15 @@
  *   {message: {id, from_username, to_username, body, sent_at}}
  *
  **/
+
+router.post("/", ensureLoggedIn, async function(req, res, next) {
+    try {
+        const message = await Message.create({ from_username: req.user.username, to_username: req.body.to_username, body: req.body.body} )
+        return res.json({ message })
+    } catch (err) {
+      return next(err);
+    }
+  });
 
 
 /** POST/:id/read - mark message as read:
@@ -28,3 +59,4 @@
  *
  **/
 
+module.exports = router;

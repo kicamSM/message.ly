@@ -24,6 +24,7 @@ const authRoutes = require("./routes/auth");
 const userRoutes = require("./routes/users");
 const messageRoutes = require("./routes/messages");
 
+// ! Note that if you try and use something that has no export and is blank you will get an error. 
 app.use("/auth", authRoutes);
 app.use("/users", userRoutes);
 app.use("/messages", messageRoutes);

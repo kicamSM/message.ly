@@ -19,6 +19,8 @@ function authenticateJWT(req, res, next) {
 /** Middleware: Requires user is authenticated. */
 
 function ensureLoggedIn(req, res, next) {
+  // console.log("EnsureLoggedIn is running")
+  // console.log(req.user)
   if (!req.user) {
     return next({ status: 401, message: "Unauthorized" });
   } else {

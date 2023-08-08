@@ -35,6 +35,8 @@
 //           phone: "+14150000000"
 //         });
 
+//     console.log("response:", response.rows)
+
 //       let token = response.body.token;
 //       expect(jwt.decode(token)).toEqual({
 //         username: "bob",
@@ -43,7 +45,9 @@
 //     });
 //   });
 
-//   /** POST /auth/login => token  */
+// })
+
+  /** POST /auth/login => token  */
 
 //   describe("POST /auth/login", function () {
 //     test("can login", async function () {

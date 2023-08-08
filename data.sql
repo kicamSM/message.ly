@@ -1,5 +1,5 @@
-DROP TABLE IF EXISTS users;
-DROP TABLE IF EXISTS messages;
+DROP TABLE IF EXISTS users CASCADE;
+DROP TABLE IF EXISTS messages CASCADE;
 
 CREATE TABLE users (
     username text PRIMARY KEY,
@@ -19,3 +19,4 @@ CREATE TABLE messages (
     sent_at timestamp with time zone NOT NULL,
     read_at timestamp with time zone
 );
+
